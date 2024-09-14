@@ -179,7 +179,7 @@ RESOURCES AND REFERENCES ..
 calmcode.io is your friend
 deeplearning.ai
 firecrawl.dev
-wolfram.io
+wolframalpha.com
 
 ===============
 SAMPLE TARGETED USE-CASES
