@@ -1,0 +1,202 @@
+THIS IS AN EXCERPT OF ALL MY NOTES FROM DAY 1 OF BUILDING THIS NETWORK
+
+LIKE I MENTIONED IN THE README IT IS AN ABSOLUTE WORK IN PROGRESS AND I'M GROWING THE REPO AS I PROCEED.
+
+
+A NEURAL NETWORK is a class of specific mathematical expressions that takes inputs as the data and takes weight, and other parameters of the neural net
+Loss function measures the accuracy of the expression. The lower the loss the more accurate the prediction.
+
+We backpropagate to get the gradient or (scale of change); following the gradient minimizes the loss
+
+
+
+NEURAL NETWORK NOTES
+Types od ANN
+Feed forward NN >> ONE-Way training ::Applications Vision and Speech Recognition
+Radial Basis Function NN >> Classifies Data Points Based on its distance from a center point ::: Power restoration systems
+Kohonen Self ORganizing NN >> Vectors of random dimensions are input to discrete map comprised of neurons ::: Medical Data Analysis
+Recurrent NN >> Hidden Layer saves its output to be used for future production
+Convolution NN >> Input features are taken in batches like filter and this allows the network to remember patters ::: Signal and Image Processing.
+Modular NN >> Collection of different neural network working together to get the output. ::: pipelines
+
+LOSS IN DL = (actual_output - weighted_output)^2
+
+BACK PROPAGATION means updating the weight of a network to reduce the error/loss in prediction
+
+
+Types of Artificial Neurons
+Perceptron and sigmoid neuron.
+
+The standard learning algo for neural networks - stochastic gradient descent.
+
+THE PERCEPTRONS
+Created by Frank Rosenblatt in 1950 - 1960s
+it takes several binary inputs and produces a single binary output.
+Weighted sum is calculated within some threshold.
+Later translated into BIAS
+# study how bias works
+
+
+Weights and Biases
+
+Sigmoid neurons
+while sigmoid neurons have much of the same qualitative behavior as perceptrons, they make it much easier to figure out how changing the weights and biases will change the output.
+
+>> To get this right a neural network is nore of like a probability scale that measures a match or validity by its relativity 0>(0.5)x<1
+
+For example, suppose we’re trying to determine whether a handwritten image depicts a “9” or not.
+A natural way to design the network is to encode the intensities of the image pixels into the input neurons. If the image is a 64 by 64 greyscale image, then we’d have 4, 096 = 64 X 64 input neurons, with the intensities scaled appropriately between 0 and 1. The output layer
+will contain just a single neuron, with output values of less than 0.5 indicating “input image is not a 9”, and values greater than 0.5 indicating “input image is a 9”.
+
+neural networks where the output from one layer is
+used as input to the next layer are called feed-forward neural networks
+
+Stochastic gradient descent is a process of finding the best values for parameters in a model in a manner that minimizes a certain error function - this can be done repeatedly.. Like in cycles.
+
+
+Something similar to Cross Validation preprocessing in ML.
+
+SGD is a powerful learning technique for training inputs (models) in a Network.
+
+In Neural Networks the neurons are kinda self-defined to help process the Learning better depending on the architecture and form of datasets fed into the training: Putting other factors in view like the Weights, biases.... 
+
+Sigmund neurons allows biases and weights; peceptron admits only weights in its learning process for now. 
+
+BACK PROPAGATION - How does it work?
+It is the workhose of learning in neural networks
+FIRST - Understand how the weight, bias and activation works across each neurons in every layer!! (Study this concept very clearly)
+SECOND - Understand that the goal of backpropagation is to compute the partial derivatives (in terms of changes) of the cost function with respect to any weight w or bias b in the network.
+
+CONVOLUTION NEURAL NETWORK (CNN)
+
+>>> Parts of a Convolution Neural Network
+Input layer accepts the pixels as input in form of arrays
+hidden carries out feature extraction - uses a matrix filter to detect feature patterns
+pooling layer uses multiple layers to detect edges, eyes and other features.
+the output layer identifies the image in itself
+
+>>> Introduction to CNN
+CNN is a Feed formward neural network that is generally used to analyze visual images by processing data with a grid-like(Matrix-Like) topology.
+
+
+===================================
+Neural Networks
+
+#hint have an understanding of what a derivative is
+
+# ALWAYS REMEMBER THE CHAIN RULE TOO
+# WHERE C IS THE OUTPUT THAT STREAMS FROM A AND B
+# dc/da == dc/db x db/da
+
+DERIVATIVE OF A SUM EXPRESSION
+
+ here c+e = d and the change or dd/dc and dd/de are both 1
+# using the formula (f(x + h) - f(x))/h
+# x = d which is equal to c + e
+# ((c + h + e) - (c + e))/h
+# open up the bracket
+# (c + h + e - c - e)/h
+# (h)/h
+# the answer is 1
+
+
+DERIVATIVE OF A MULTIPLIER EXPRESSION
+
+# de/da || de/db
+
+# e = a * b
+
+# de/da = b
+# explain the line above
+# (f (a * b + h) - f(a * b))/h
+# (fa + fb + fh - fa - fb)/h
+# (fh)/h
+# the answer is f
+
+===================================
+
+Writing pure losses using 
+mean squared error or enthropy loss functions - entropy is king and leverages on tanh..
+
+
+
+LLM MAKEMORE CLASS A KINDA GPT
+balanced tokenization is key 
+undertsand multinomial distributions like simple probability vectorizations...
+
+# taking a tensor or array and convert it into probabillities and pass in a weight tensor with a fixed, seeded generator to get integers which are sampled accross the probability distributions.
+
+# e.g Aso ebi purchase power from the celebrants and the probability that it will be sampled in the buyer's attire on the day of the event.. if i buy a bigger share of the attire then i'll likely probably turn up relevant and significant on the event day amongst others but if i buy a smaller share like one yard then maybe i'll be making boxers which is quite hard to notice, gele or just attaching it to a small piece of myself compared to the entire owambe crowd. - multinomial
+
+# UNDERSTANDING BROADCASTING SEMANTICS
+Two dimensions are compatible when
+they are equal, or one of them is 1.
+
+when applying broadcasting across tensor sums always .sum(dimsize = 1, keepdim=True) keepdim to be true to protect the dimensions.
+
+
+
+E.G. 
+c = a * b
+a[3x3] * b[3x1]
+
+a11*b1 a12*b1 a13*b1
+a21*b2 a22*b2 a23*b2
+a31*b3 b32*b2 b33*b3
+= c[3x3]
+
+### NORMALIZATIONS AND ACTTIVATIONS
+---- It is possible to have dead neurons if the activation function is faulty.... Due to excessive extreme values in the activation.... -1, 1. SOLUTION: multiply the input neuron by 0.1 < 0.2 and the starting bias by 0.01 # TANH ACTIVATION LAYER BEING TOO SATURATED AT INIT
+----- Also to solve this problem of normalization on init.... Study torch.kaining and understand how to (in the case of a TanH Activation) apply, at the initialization of the input weigth neuron, the formula (5/3) / (fan_in ** 0.5) i.e. 5/3 divided by the square root of the fan in. Where Fan_in == n_embd * block_size...
+
+---- Always check your loss flow and ensure that there is no excessive chunking of loss; as in you trying to choke the loss to normalize, it will cause internal imbalance for your neurons instead; adjust the layer's weights and biases to be close to zero........ #SOFTMAX BEING CONFIDENTLY WRONG
+
+---- Batch Normalization
+We can standardize || stabilize our activations (hidden layer preactivations)
+By Substracting the Means and dividing it by the standard deviation
+
+hlpreact = (hlpreact - hlpreact.mean(1, keepdim=true)) / hlpreact.std(1, keepdim=true)
+
+Now to avoid fitting errors when running the network or when backpropagating; there is a way to fit this gaussian to just the initialization step.
+Introducing Scaling Shift: scaling by gain and offsetting by some bias.
+binary || batchgains and batch biases using ones and zeros.
+
+These helps activations to be gaussian or calmly balanced through out the neural net.
+
+Summary: We are using Batch normalization to control the statistics of activations in the neural net.
+
+WALKING THROUGH BACKPROP PER EXPRESSION AND ALGORITHM
+NOTE: Any time you have a sum in the forward pass, it means there is a broadcast/replication in the backward pass; conversely if there is a replication/broadcast in the forward pass that leads to a sum over the respective dimension in the backward/backdrop pass.... dim 1 is horizontal, dim 0 is vertical.
+
+
+WAVENETS
+Matrix Multiplication only works on the last dimension, the former dimensions often remain unchanged.
+
+
+
+====================================
+RESOURCES AND REFERENCES ..
+calmcode.io is your friend
+deeplearning.ai
+firecrawl.dev
+wolfram.io
+
+===============
+SAMPLE TARGETED USE-CASES
+Price predictive model.. using SVR or Normal LR
+
+Recommendation System using GeoTags and Business/user location tag....
+
+OpenCV or TensorFlow Conv2D image classification algorighm to image classification or inspection.
+
+>>>>>>>>>>>>>>>>>>
+SIMPLE NEURAL NETWORK GUIDE,
+1. DEFINE YOUR LAYERS (embeddings, hidden neurons, generators, C= input neuron) WEIGHTS AND BIASES
+2. ATTACH BATCH NORMALIZATION
+3. RETRIEVE THE PARAMETERS
+4. CREATE A MINIBATCH CONSTRUCT (fed into the training dataset)
+5. START THE FORWARD PASS
+6. THE BACKWARD PASS
+7. SAMPLE FROM THE MODEL
+
+
